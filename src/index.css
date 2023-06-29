@@ -1,0 +1,39 @@
+:root {
+  --color-primary: #1e2022;
+  --color-light: #f0f5f9;
+
+  /* --color-accent: 205, 24, 24; */
+  /* --color-accent: 244, 80, 80; */
+  --color-accent: 82, 97, 107;
+
+  /* --color-focus: 60, 72, 107; */
+  --color-focus: 201, 214, 223;
+
+  --bg-color: #f0f5f9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a,
+a:visited {
+  text-decoration: none;
+}
+
+body {
+  background-color: var(--bg-color);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.wrapper {
+  min-height: 100%;
+  overflow: hidden;
+}
