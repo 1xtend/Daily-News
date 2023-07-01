@@ -8,19 +8,6 @@ function SearchForm({ onSearch }) {
   const [searchValue, setSearchValue] = useState('');
 
   return (
-    // <form className={styles.form} onSubmit={(e) => onSearch(e, searchValue)}>
-    //   <input
-    //     type="text"
-    //     required
-    //     className={styles.input}
-    //     onChange={(e) => setSearchValue(e.target.value)}
-    //     value={searchValue}
-    //   />
-    //   <button type="submit" className={styles.button}>
-    //     Search
-    //   </button>
-    // </form>
-
     <Box
       component="form"
       autoComplete="off"
@@ -28,7 +15,7 @@ function SearchForm({ onSearch }) {
         display: 'flex',
         columnGap: '8px',
       }}
-      onSubmit={onSearch}
+      onSubmit={(e) => onSearch(e, searchValue)}
     >
       <Input
         variant="outlined"
@@ -40,7 +27,9 @@ function SearchForm({ onSearch }) {
         value={searchValue}
       />
 
-      <CustomButton variant="outlined">Search</CustomButton>
+      <CustomButton variant="outlined" type="submit">
+        Search
+      </CustomButton>
     </Box>
   );
 }
