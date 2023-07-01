@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import { Container } from '@mui/material';
+
 import Header from './components/Header/Header';
-import Container from './components/Container/Container';
+// import Container from './components/Container/Container';
 import NewsList from './components/NewsList/NewsList';
 
 function App() {
@@ -21,7 +23,7 @@ function App() {
     console.log(query);
   }, [query]);
 
-  function searchNews(e, query) {
+  function handleSearch(e, query) {
     e.preventDefault();
 
     setQuery(query);
@@ -29,9 +31,13 @@ function App() {
 
   return (
     <div className="wrapper">
-      <Container>
-        <Header onSearch={searchNews} />
-        <NewsList stories={stories} />
+      {/* <Container> */}
+      {/* <Header onSearch={searchNews} />
+        <NewsList stories={stories} /> */}
+      {/* </Container> */}
+
+      <Container maxWidth="md">
+        <Header onSearch={handleSearch} />
       </Container>
     </div>
   );

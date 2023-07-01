@@ -1,6 +1,7 @@
 import styles from './Container.module.css';
+import { Container } from '@mui/material';
 
 function Container({ children }) {
-  return <div className={styles.container}>{children}</div>;
+  return <Container maxWidth="">{children}</Container>;
 }
 export default Container;
