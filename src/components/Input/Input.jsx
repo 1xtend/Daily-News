@@ -1,10 +1,10 @@
 import { styled, TextField } from '@mui/material';
 
-const Input = styled(TextField)(({ theme }) => ({
+const Input = styled(TextField)(() => ({
   fontFamily: 'inherit',
 
   '&:hover .MuiOutlinedInput-notchedOutline': {
-    borderColor: 'rgba(0, 0, 0, 0.6)',
+    borderColor: 'rgba(0, 0, 0, 0.4)',
   },
 
   '& .MuiInputBase-root': {
