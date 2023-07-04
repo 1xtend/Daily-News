@@ -1,15 +1,16 @@
 :root {
-  --color-primary: #1e2022;
-  --color-light: #f0f5f9;
+  --color-primary: #000;
+  --color-light: #fff;
 
-  /* --color-accent: 205, 24, 24; */
-  /* --color-accent: 244, 80, 80; */
-  --color-accent: 82, 97, 107;
+  --color-grey: #e9e8e8;
+  --color-grey-dark: #555;
 
-  /* --color-focus: 60, 72, 107; */
-  --color-focus: 201, 214, 223;
+  --color-blue: #086cf9;
+  --color-blue-dark: #004bcc;
+  --color-red: #e84545;
+  --color-yellow: #fdb827;
 
-  --bg-color: #f0f5f9;
+  --color-bg: #ecf4ff;
 }
 
 * {
@@ -29,8 +30,9 @@ a:visited {
 }
 
 body {
-  /* background-color: var(--bg-color); */
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
 }
 
 .wrapper {

@@ -1,24 +1,105 @@
 import styles from './NewsListElem.module.css';
 
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
+import { Favorite, Comment } from '@mui/icons-material';
 
 function NewsListElem({ story }) {
   return (
-    // <div className={styles.div}>
-    //   <h2>
-    //     <a href={story.url} target="_blank" rel="noopener noreferrer">
-    //       {story.title}
-    //     </a>
-    //   </h2>
-
-    //   <span>{story.author}</span>
-    // </div>
-
     <Box
       sx={{
-        backgroundColor: 'red',
+        padding: '24px',
+        backgroundColor: 'var(--color-light)',
+        borderRadius: '6px',
       }}
-    ></Box>
+    >
+      <Typography
+        component="a"
+        href={story.url}
+        target="_blank"
+        rel="noreferrer noopener"
+        sx={{
+          fontWeight: 700,
+          display: 'block',
+          color: 'var(--color-blue)',
+          position: 'relative',
+          paddingBottom: '16px',
+          fontSize: '22 px',
+
+          '&:after': {
+            content: `''`,
+            width: '100%',
+            height: '1px',
+            position: 'absolute',
+            left: 0,
+            bottom: 0,
+            backgroundColor: 'var(--color-grey)',
+            borderRadius: '1px',
+          },
+
+          '&:hover': {
+            color: 'var(--color-blue-dark)',
+            textDecoration: 'underline',
+          },
+        }}
+      >
+        {story.title}
+      </Typography>
+      <Box
+        sx={{
+          paddingTop: '16px',
+          display: 'flex',
+          columnGap: '40px',
+          rowGap: '12px',
+          flexWrap: 'wrap',
+
+          '&:not(:last-child)': {
+            marginBottom: '16px',
+          },
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <Favorite
+            sx={{
+              fill: 'var(--color-red)',
+            }}
+          />
+          <span>{story.points}</span>
+        </Box>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <Comment
+            sx={{
+              fill: 'var(--color-primary)',
+            }}
+          />
+          <span>{story.num_comments}</span>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          fontSize: '18px',
+          color: '#333',
+
+          span: {
+            fontWeight: 700,
+          },
+        }}
+      >
+        <span>Author: </span>
+        {story.author}
+      </Box>
+    </Box>
   );
 }
 
