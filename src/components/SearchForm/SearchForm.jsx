@@ -1,4 +1,3 @@
-import styles from './SearchForm.module.css';
 import { useState } from 'react';
 import { Box } from '@mui/material';
 import Input from '../Input/Input';

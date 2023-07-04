@@ -1,12 +1,16 @@
-import styles from './Header.module.css';
+import { Box } from '@mui/material';
 
 import SearchForm from '../SearchForm/SearchForm';
 
 function Header({ onSearch }) {
   return (
-    <header className={styles.header}>
+    <Box
+      sx={{
+        padding: '20px 0',
+      }}
+    >
       <SearchForm onSearch={onSearch} />
-    </header>
+    </Box>
   );
 }
 export default Header;

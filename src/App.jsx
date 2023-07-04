@@ -5,8 +5,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box, Container, LinearProgress, Pagination } from '@mui/material';
 
 import Header from './components/Header/Header';
-// import Container from './components/Container/Container';
 import NewsList from './components/NewsList/NewsList';
+
+axios.defaults.baseURL = 'http://hn.algolia.com/api/v1/search';
 
 const theme = createTheme({
   typography: {
@@ -58,7 +59,12 @@ function App() {
     setLoading(true);
 
     axios
-      .get(`http://hn.algolia.com/api/v1/search?query=${query}&page=${page}`)
+      .get(`?`, {
+        params: {
+          query,
+          page,
+        },
+      })
       .then((res) => {
         setStories(res.data.hits);
         setPagesCount(res.data.nbPages);

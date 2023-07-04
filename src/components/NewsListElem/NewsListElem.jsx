@@ -1,5 +1,3 @@
-import styles from './NewsListElem.module.css';
-
 import { Box, Typography } from '@mui/material';
 import { Favorite, Comment } from '@mui/icons-material';
 

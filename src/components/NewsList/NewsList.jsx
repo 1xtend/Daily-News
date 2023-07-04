@@ -1,4 +1,3 @@
-import styles from './NewsList.module.css';
 import NewsListElem from '../NewsListElem/NewsListElem';
 
 import { Grid } from '@mui/material';
