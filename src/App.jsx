@@ -7,8 +7,6 @@ import { Box, Container, LinearProgress, Pagination } from '@mui/material';
 import Header from './components/Header/Header';
 import NewsList from './components/NewsList/NewsList';
 
-axios.defaults.baseURL = 'http://hn.algolia.com/api/v1/search';
-
 const theme = createTheme({
   typography: {
     fontFamily: '"DM Sans", sans-serif',
@@ -46,7 +44,7 @@ function App() {
   const [query, setQuery] = useState('');
   const [stories, setStories] = useState([]);
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(0);
 
   const [loading, setLoading] = useState(false);
@@ -59,10 +57,10 @@ function App() {
     setLoading(true);
 
     axios
-      .get(`?`, {
+      .get('http://hn.algolia.com/api/v1/search?', {
         params: {
           query,
-          page,
+          page: page - 1,
         },
       })
       .then((res) => {
@@ -71,9 +69,12 @@ function App() {
       })
       .finally(() => {
         setLoading(false);
-      });
 
-    console.log(query);
+        window.scrollTo({
+          behavior: 'smooth',
+          top: 0,
+        });
+      });
   }, [query, page]);
 
   function handleSearch(e, query) {
@@ -81,12 +82,8 @@ function App() {
 
     setQuery(query);
     setStories([]);
-    setPage(0);
+    setPage(1);
     setPagesCount(0);
-  }
-
-  function loadMore(currentPage) {
-    setPage((prevPage) => prevPage + currentPage);
   }
 
   return (
@@ -95,7 +92,7 @@ function App() {
         {loading && (
           <LinearProgress
             sx={{
-              position: 'absolute',
+              position: 'fixed',
               top: 0,
               left: 0,
               width: '100%',
@@ -118,7 +115,14 @@ function App() {
               },
             }}
           >
-            {pagesCount > 0 && <Pagination count={pagesCount} color="primary" />}
+            {pagesCount > 0 && (
+              <Pagination
+                count={pagesCount}
+                page={page}
+                color="primary"
+                onChange={(e, value) => setPage(value)}
+              />
+            )}
           </Box>
         </Container>
       </div>

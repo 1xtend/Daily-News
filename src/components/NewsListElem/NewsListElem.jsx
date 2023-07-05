@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Link } from '@mui/material';
 import { Favorite, Comment } from '@mui/icons-material';
 
 function NewsListElem({ story }) {
@@ -10,18 +10,18 @@ function NewsListElem({ story }) {
         borderRadius: '6px',
       }}
     >
-      <Typography
-        component="a"
+      <Link
         href={story.url}
         target="_blank"
         rel="noreferrer noopener"
+        underline="none"
         sx={{
           fontWeight: 700,
           display: 'block',
           color: 'var(--color-blue)',
           position: 'relative',
           paddingBottom: '16px',
-          fontSize: '22 px',
+          fontSize: '22px',
 
           '&:after': {
             content: `''`,
@@ -40,8 +40,8 @@ function NewsListElem({ story }) {
           },
         }}
       >
-        {story.title}
-      </Typography>
+        {story.title || story.story_title}
+      </Link>
       <Box
         sx={{
           paddingTop: '16px',
