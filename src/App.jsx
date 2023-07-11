@@ -49,12 +49,17 @@ function App() {
 
   const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState('');
+
   useEffect(() => {
     if (query === '') {
+      setError('Missing query');
+
       return;
     }
 
     setLoading(true);
+    setError('');
 
     axios
       .get('http://hn.algolia.com/api/v1/search?', {
@@ -84,6 +89,10 @@ function App() {
     setStories([]);
     setPage(1);
     setPagesCount(0);
+  }
+
+  function handleError(text) {
+    setError(text);
   }
 
   return (

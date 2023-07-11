@@ -23,6 +23,10 @@ function NewsListElem({ story }) {
           paddingBottom: '16px',
           fontSize: '22px',
 
+          '&:not(:last-child)': {
+            marginBottom: '16px',
+          },
+
           '&:after': {
             content: `''`,
             width: '100%',
@@ -42,48 +46,56 @@ function NewsListElem({ story }) {
       >
         {story.title || story.story_title}
       </Link>
-      <Box
-        sx={{
-          paddingTop: '16px',
-          display: 'flex',
-          columnGap: '40px',
-          rowGap: '12px',
-          flexWrap: 'wrap',
 
-          '&:not(:last-child)': {
-            marginBottom: '16px',
-          },
-        }}
-      >
+      {(story.points || story.num_comments) && (
         <Box
           sx={{
             display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
+            columnGap: '40px',
+            rowGap: '12px',
+            flexWrap: 'wrap',
+
+            '&:not(:last-child)': {
+              marginBottom: '16px',
+            },
           }}
         >
-          <Favorite
-            sx={{
-              fill: 'var(--color-red)',
-            }}
-          />
-          <span>{story.points}</span>
+          {story.points && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <Favorite
+                sx={{
+                  fill: 'var(--color-red)',
+                }}
+              />
+              <span>{story.points}</span>
+            </Box>
+          )}
+
+          {story.num_comments && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+              }}
+            >
+              <Comment
+                sx={{
+                  fill: 'var(--color-primary)',
+                }}
+              />
+              <span>{story.num_comments}</span>
+            </Box>
+          )}
         </Box>
-        <Box
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-          }}
-        >
-          <Comment
-            sx={{
-              fill: 'var(--color-primary)',
-            }}
-          />
-          <span>{story.num_comments}</span>
-        </Box>
-      </Box>
+      )}
+
       <Box
         sx={{
           fontSize: '18px',
