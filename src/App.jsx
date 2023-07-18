@@ -40,6 +40,8 @@ const theme = createTheme({
   },
 });
 
+axios.defaults.baseURL = 'http://hn.algolia.com/api/v1';
+
 function App() {
   const [query, setQuery] = useState('');
   const [stories, setStories] = useState([]);
@@ -49,28 +51,46 @@ function App() {
 
   const [loading, setLoading] = useState(false);
 
-  const [error, setError] = useState('');
+  const [error, setError] = useState({
+    text: '',
+    isError: false,
+  });
 
   useEffect(() => {
     if (query === '') {
-      setError('Missing query');
-
       return;
     }
 
     setLoading(true);
-    setError('');
+    setError({
+      text: '',
+      isError: false,
+    });
 
     axios
-      .get('http://hn.algolia.com/api/v1/search?', {
+      .get('/search', {
         params: {
           query,
           page: page - 1,
+          tags: 'story',
         },
       })
       .then((res) => {
-        setStories(res.data.hits);
-        setPagesCount(res.data.nbPages);
+        if (res.data.nbHits <= 0) {
+          setError({
+            text: 'No posts',
+            isError: true,
+          });
+        } else {
+          setStories(res.data.hits);
+          setPagesCount(res.data.nbPages);
+        }
+      })
+      .catch((err) => {
+        setError({
+          text: err.message,
+          isError: true,
+        });
       })
       .finally(() => {
         setLoading(false);
@@ -91,14 +111,15 @@ function App() {
     setPagesCount(0);
   }
 
-  function handleError(text) {
-    setError(text);
-  }
-
   return (
     <ThemeProvider theme={theme}>
-      <div className="wrapper">
-        {loading && (
+      <Box
+        sx={{
+          minHeight: '100%',
+          overflow: 'hidden',
+        }}
+      >
+        {!error.isError && loading && (
           <LinearProgress
             sx={{
               position: 'fixed',
@@ -110,31 +131,32 @@ function App() {
         )}
 
         <Container maxWidth="md">
-          <Header onSearch={handleSearch} />
+          <Header onSearch={handleSearch} error={error} setError={setError} />
 
-          <NewsList stories={stories} />
+          {!error.isError && stories.length > 0 && <NewsList stories={stories} />}
 
-          <Box
-            sx={{
-              padding: '16px 0',
-              margin: '0 auto',
+          {!error.isError && pagesCount > 1 && (
+            <Box
+              sx={{
+                padding: '16px 0',
+                margin: '0 auto',
 
-              '& .MuiPagination-ul': {
-                justifyContent: 'center',
-              },
-            }}
-          >
-            {pagesCount > 0 && (
+                '& .MuiPagination-ul': {
+                  justifyContent: 'center',
+                },
+              }}
+            >
               <Pagination
                 count={pagesCount}
                 page={page}
                 color="primary"
                 onChange={(e, value) => setPage(value)}
+                disabled={loading}
               />
-            )}
-          </Box>
+            </Box>
+          )}
         </Container>
-      </div>
+      </Box>
     </ThemeProvider>
   );
 }

@@ -29,13 +29,24 @@ a:visited {
   text-decoration: none;
 }
 
-body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--color-bg);
-  color: var(--color-primary);
+body::-webkit-scrollbar {
+  width: 10px;
 }
 
-.wrapper {
-  min-height: 100%;
-  overflow: hidden;
+body::-webkit-scrollbar-track {
+  background-color: var(--color-light);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--color-blue);
+}
+
+body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-blue-dark);
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-primary);
 }

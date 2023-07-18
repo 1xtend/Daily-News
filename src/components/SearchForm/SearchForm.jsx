@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Input from '../Input/Input';
 import CustomButton from '../CustomButton/CustomButton';
 
-function SearchForm({ onSearch }) {
+function SearchForm({ onSearch, error, setError }) {
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -24,6 +24,15 @@ function SearchForm({ onSearch }) {
         size="small"
         onChange={(e) => setSearchValue(e.target.value)}
         value={searchValue}
+        helperText={error.text}
+        error={error.isError}
+        sx={{
+          '.MuiFormHelperText-root': {
+            position: 'absolute',
+            bottom: '-26px',
+            left: 0,
+          },
+        }}
       />
 
       <CustomButton variant="outlined" type="submit">

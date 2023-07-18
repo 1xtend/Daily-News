@@ -8,13 +8,19 @@ function NewsListElem({ story }) {
         padding: '24px',
         backgroundColor: 'var(--color-light)',
         borderRadius: '6px',
+        height: '100%',
+
+        '& > *:not(:last-child)': {
+          marginBottom: '16px',
+        },
       }}
     >
       <Link
-        href={story.url}
+        href={story.url || story.story_url}
         target="_blank"
         rel="noreferrer noopener"
         underline="none"
+        className={`${!story.url && !story.story_url && 'disabled'}`}
         sx={{
           fontWeight: 700,
           display: 'block',
@@ -22,10 +28,10 @@ function NewsListElem({ story }) {
           position: 'relative',
           paddingBottom: '16px',
           fontSize: '22px',
-
-          '&:not(:last-child)': {
-            marginBottom: '16px',
-          },
+          maxWidth: '100%',
+          whiteSpace: 'nowrap',
+          textOverflow: 'ellipsis',
+          overflow: 'hidden',
 
           '&:after': {
             content: `''`,
@@ -38,63 +44,57 @@ function NewsListElem({ story }) {
             borderRadius: '1px',
           },
 
-          '&:hover': {
+          '&:not(.disabled):hover': {
             color: 'var(--color-blue-dark)',
             textDecoration: 'underline',
+          },
+
+          '&.disabled': {
+            color: 'var(--color-grey-dark)',
           },
         }}
       >
         {story.title || story.story_title}
       </Link>
 
-      {(story.points || story.num_comments) && (
+      <Box
+        sx={{
+          display: 'flex',
+          columnGap: '40px',
+          rowGap: '12px',
+          flexWrap: 'wrap',
+        }}
+      >
         <Box
           sx={{
             display: 'flex',
-            columnGap: '40px',
-            rowGap: '12px',
-            flexWrap: 'wrap',
-
-            '&:not(:last-child)': {
-              marginBottom: '16px',
-            },
+            alignItems: 'center',
+            gap: '6px',
           }}
         >
-          {story.points && (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-            >
-              <Favorite
-                sx={{
-                  fill: 'var(--color-red)',
-                }}
-              />
-              <span>{story.points}</span>
-            </Box>
-          )}
-
-          {story.num_comments && (
-            <Box
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-            >
-              <Comment
-                sx={{
-                  fill: 'var(--color-primary)',
-                }}
-              />
-              <span>{story.num_comments}</span>
-            </Box>
-          )}
+          <Favorite
+            sx={{
+              fill: 'var(--color-grey-dark)',
+            }}
+          />
+          <span>{story.points}</span>
         </Box>
-      )}
+
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+          }}
+        >
+          <Comment
+            sx={{
+              fill: 'var(--color-grey-dark)',
+            }}
+          />
+          <span>{story.num_comments}</span>
+        </Box>
+      </Box>
 
       <Box
         sx={{
@@ -108,6 +108,28 @@ function NewsListElem({ story }) {
       >
         <span>Author: </span>
         {story.author}
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '6px',
+          flexWrap: 'wrap',
+        }}
+      >
+        {story._tags.map((tag) => (
+          <Box
+            key={tag}
+            sx={{
+              padding: '2px 8px',
+              backgroundColor: 'var(--color-grey)',
+              borderRadius: '12px',
+              fontSize: '16px',
+            }}
+          >
+            {tag}
+          </Box>
+        ))}
       </Box>
     </Box>
   );
