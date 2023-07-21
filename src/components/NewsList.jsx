@@ -1,4 +1,4 @@
-import NewsListElem from '../NewsListElem/NewsListElem';
+import NewsListElem from './NewsListElem';
 
 import { Grid } from '@mui/material';
 // import Grid from '@mui/material/Unstable_Grid2';

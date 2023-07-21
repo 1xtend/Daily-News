@@ -1,4 +1,4 @@
-import { Box, Typography, Link } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { Favorite, Comment } from '@mui/icons-material';
 
 function NewsListElem({ story }) {

@@ -4,8 +4,8 @@ import axios from 'axios';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Box, Container, LinearProgress, Pagination } from '@mui/material';
 
-import Header from './components/Header/Header';
-import NewsList from './components/NewsList/NewsList';
+import Header from './components/Header';
+import NewsList from './components/NewsList';
 
 const theme = createTheme({
   typography: {
@@ -51,10 +51,7 @@ function App() {
 
   const [loading, setLoading] = useState(false);
 
-  const [error, setError] = useState({
-    text: '',
-    isError: false,
-  });
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (query === '') {
@@ -62,10 +59,7 @@ function App() {
     }
 
     setLoading(true);
-    setError({
-      text: '',
-      isError: false,
-    });
+    setError('');
 
     axios
       .get('/search', {
@@ -77,20 +71,14 @@ function App() {
       })
       .then((res) => {
         if (res.data.nbHits <= 0) {
-          setError({
-            text: 'No posts',
-            isError: true,
-          });
+          setError('No posts');
         } else {
           setStories(res.data.hits);
           setPagesCount(res.data.nbPages);
         }
       })
       .catch((err) => {
-        setError({
-          text: err.message,
-          isError: true,
-        });
+        setError(err.message);
       })
       .finally(() => {
         setLoading(false);
@@ -131,7 +119,7 @@ function App() {
         )}
 
         <Container maxWidth="md">
-          <Header onSearch={handleSearch} error={error} setError={setError} />
+          <Header onSearch={handleSearch} error={error} />
 
           {!error.isError && stories.length > 0 && <NewsList stories={stories} />}
 

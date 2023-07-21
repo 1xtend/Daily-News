@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 
-import SearchForm from '../SearchForm/SearchForm';
+import SearchForm from './SearchForm';
 
-function Header({ onSearch, error, setError }) {
+function Header({ onSearch, error }) {
   return (
     <Box
       sx={{
@@ -10,7 +10,7 @@ function Header({ onSearch, error, setError }) {
       }}
       component="header"
     >
-      <SearchForm onSearch={onSearch} error={error} setError={setError} />
+      <SearchForm onSearch={onSearch} error={error} />
     </Box>
   );
 }
