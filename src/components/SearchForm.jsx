@@ -12,7 +12,8 @@ function SearchForm({ onSearch, error }) {
       autoComplete="off"
       sx={{
         display: 'flex',
-        columnGap: '8px',
+        gap: '8px',
+        flexWrap: 'wrap',
       }}
       onSubmit={(e) => onSearch(e, searchValue)}
     >
@@ -27,6 +28,8 @@ function SearchForm({ onSearch, error }) {
         helperText={error}
         error={!!error}
         sx={{
+          flex: '1 1 80%',
+
           '.MuiFormHelperText-root': {
             position: 'absolute',
             bottom: '-22px',
@@ -35,7 +38,13 @@ function SearchForm({ onSearch, error }) {
         }}
       />
 
-      <CustomButton variant="outlined" type="submit">
+      <CustomButton
+        variant="outlined"
+        type="submit"
+        sx={{
+          flex: '1 0 auto',
+        }}
+      >
         Search
       </CustomButton>
     </Box>

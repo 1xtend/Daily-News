@@ -53,6 +53,9 @@ function App() {
 
   const [error, setError] = useState('');
 
+  const [sortType, setSortType] = useState('story');
+  const [sortBy, setSortBy] = useState('search');
+
   useEffect(() => {
     if (query === '') {
       return;
@@ -62,11 +65,11 @@ function App() {
     setError('');
 
     axios
-      .get('/search', {
+      .get(`/${sortBy}`, {
         params: {
           query,
           page: page - 1,
-          tags: 'story',
+          tags: sortType,
         },
       })
       .then((res) => {
@@ -88,15 +91,23 @@ function App() {
           top: 0,
         });
       });
-  }, [query, page]);
+  }, [query, page, sortType, sortBy]);
 
   function handleSearch(e, query) {
     e.preventDefault();
 
-    setQuery(query);
+    setQuery(query.trim());
     setStories([]);
     setPage(1);
     setPagesCount(0);
+  }
+
+  function handleSortType(value) {
+    setSortType(value);
+  }
+
+  function handleSortBy(value) {
+    setSortBy(value);
   }
 
   return (
@@ -119,7 +130,14 @@ function App() {
         )}
 
         <Container maxWidth="md">
-          <Header onSearch={handleSearch} error={error} />
+          <Header
+            onSearch={handleSearch}
+            error={error}
+            sortType={sortType}
+            onSortTypeChange={handleSortType}
+            sortBy={sortBy}
+            onSortByChange={handleSortBy}
+          />
 
           {!error.isError && stories.length > 0 && <NewsList stories={stories} />}
 
