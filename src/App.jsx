@@ -40,7 +40,7 @@ const theme = createTheme({
   },
 });
 
-axios.defaults.baseURL = 'http://hn.algolia.com/api/v1';
+axios.defaults.baseURL = 'https://hn.algolia.com/api/v1';
 
 function App() {
   const [query, setQuery] = useState('');
