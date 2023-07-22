@@ -16,7 +16,7 @@ function NewsListElem({ story }) {
       }}
     >
       <Link
-        href={story.url || story.story_url}
+        href={story.url || story.story_url ? story.url || story.story_url : null}
         target="_blank"
         rel="noreferrer noopener"
         underline="none"
@@ -33,7 +33,7 @@ function NewsListElem({ story }) {
           textOverflow: 'ellipsis',
           overflow: 'hidden',
 
-          '&:after': {
+          ':after': {
             content: `''`,
             width: '100%',
             height: '1px',
@@ -44,7 +44,7 @@ function NewsListElem({ story }) {
             borderRadius: '1px',
           },
 
-          '&:not(.disabled):hover': {
+          ':not(.disabled):hover': {
             color: 'var(--color-blue-dark)',
             textDecoration: 'underline',
           },
@@ -77,7 +77,7 @@ function NewsListElem({ story }) {
               fill: 'var(--color-grey-dark)',
             }}
           />
-          <span>{story.points}</span>
+          <span>{story.points ? story.points : 0}</span>
         </Box>
 
         <Box
@@ -92,7 +92,7 @@ function NewsListElem({ story }) {
               fill: 'var(--color-grey-dark)',
             }}
           />
-          <span>{story.num_comments}</span>
+          <span>{story.num_comments ? story.num_comments : 0}</span>
         </Box>
       </Box>
 
