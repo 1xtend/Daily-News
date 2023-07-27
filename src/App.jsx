@@ -44,7 +44,7 @@ axios.defaults.baseURL = 'https://hn.algolia.com/api/v1';
 
 function App() {
   const [query, setQuery] = useState('');
-  const [stories, setStories] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   const [page, setPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(0);
@@ -76,7 +76,7 @@ function App() {
         if (res.data.nbHits <= 0) {
           setError('No posts');
         } else {
-          setStories(res.data.hits);
+          setPosts(res.data.hits);
           setPagesCount(res.data.nbPages);
         }
       })
@@ -93,11 +93,15 @@ function App() {
       });
   }, [query, page, sortType, sortBy]);
 
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [sortType, sortBy]);
+
   function handleSearch(e, query) {
     e.preventDefault();
 
     setQuery(query.trim());
-    setStories([]);
+    setPosts([]);
     setPage(1);
     setPagesCount(0);
   }
@@ -139,7 +143,9 @@ function App() {
             onSortByChange={handleSortBy}
           />
 
-          {!error.isError && stories.length > 0 && <NewsList stories={stories} />}
+          {!error.isError && posts.length > 0 && <NewsList posts={posts} sortType={sortType} />}
+
+          {/* <NewsList posts={posts} sortType={sortType} /> */}
 
           {!error.isError && pagesCount > 1 && (
             <Box

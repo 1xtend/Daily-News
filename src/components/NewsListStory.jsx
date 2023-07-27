@@ -1,7 +1,11 @@
 import { Box, Link } from '@mui/material';
 import { Favorite, Comment } from '@mui/icons-material';
 
-function NewsListElem({ story }) {
+import moment from 'moment/moment';
+
+function NewsListStory({ story }) {
+  const storyDate = new Date(story.created_at_i);
+
   return (
     <Box
       sx={{
@@ -126,13 +130,24 @@ function NewsListElem({ story }) {
               borderRadius: '12px',
               fontSize: '16px',
             }}
+            component="span"
           >
             {tag}
           </Box>
         ))}
       </Box>
+
+      <Box
+        component="span"
+        sx={{
+          color: 'var(--color-grey-dark)',
+          letterSpacing: '0.8px',
+        }}
+      >
+        {moment(story.created_at).format('YYYY.MM.DD')}
+      </Box>
     </Box>
   );
 }
 
-export default NewsListElem;
+export default NewsListStory;
