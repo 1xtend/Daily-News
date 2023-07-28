@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { Box, Container, LinearProgress, Pagination } from '@mui/material';
+import { Box, Container, LinearProgress, Pagination, Alert, IconButton } from '@mui/material';
+import { Close } from '@mui/icons-material';
 
 import Header from './components/Header';
 import NewsList from './components/NewsList';
@@ -93,10 +94,6 @@ function App() {
       });
   }, [query, page, sortType, sortBy]);
 
-  // useEffect(() => {
-  //   setPage(1);
-  // }, [sortType, sortBy]);
-
   function handleSearch(e, query) {
     e.preventDefault();
 
@@ -145,8 +142,6 @@ function App() {
 
           {!error.isError && posts.length > 0 && <NewsList posts={posts} sortType={sortType} />}
 
-          {/* <NewsList posts={posts} sortType={sortType} /> */}
-
           {!error.isError && pagesCount > 1 && (
             <Box
               sx={{
@@ -166,6 +161,30 @@ function App() {
                 disabled={loading}
               />
             </Box>
+          )}
+
+          {error && (
+            <Alert
+              severity="error"
+              variant="filled"
+              sx={{
+                position: 'fixed',
+                bottom: '15px',
+                left: '15px',
+              }}
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => setError(false)}
+                >
+                  <Close fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {error}
+            </Alert>
           )}
         </Container>
       </Box>

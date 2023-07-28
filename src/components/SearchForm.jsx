@@ -25,16 +25,8 @@ function SearchForm({ onSearch, error }) {
         size="small"
         onChange={(e) => setSearchValue(e.target.value)}
         value={searchValue}
-        helperText={error}
-        error={!!error}
         sx={{
           flex: '1 1 80%',
-
-          '.MuiFormHelperText-root': {
-            position: 'absolute',
-            bottom: '-22px',
-            left: 0,
-          },
         }}
       />
 
