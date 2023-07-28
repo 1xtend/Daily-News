@@ -49,7 +49,6 @@ function NewsListComment({ comment }) {
         }}
       >
         <Avatar {...stringAvatar(comment.author)}></Avatar>
-        {/* <Avatar {...stringAvatar('vlad')}></Avatar> */}
 
         <Typography
           sx={{
@@ -60,7 +59,11 @@ function NewsListComment({ comment }) {
           variant="body1"
           onClick={(e) => setShow((prevShow) => !prevShow)}
         >
-          {!show ? comment.comment_text.substring(0, maxLetters) : comment.comment_text}
+          {show
+            ? comment.comment_text
+            : comment.comment_text &&
+              comment.comment_text.trim().substring(0, maxLetters) +
+                (comment.comment_text.length > maxLetters ? '...' : '')}
         </Typography>
       </Box>
     </Box>
