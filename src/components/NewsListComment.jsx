@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
 
+import moment from 'moment/moment';
+
 function NewsListComment({ comment }) {
   const [show, setShow] = useState(false);
 
@@ -40,31 +42,95 @@ function NewsListComment({ comment }) {
         backgroundColor: 'var(--color-light)',
         borderRadius: '6px',
         height: '100%',
+
+        '& > *:not(:last-child)': {
+          marginBottom: '12px',
+        },
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          gap: '8px',
+          gap: '12px',
+          alignItems: 'center',
         }}
       >
         <Avatar {...stringAvatar(comment.author)}></Avatar>
 
-        <Typography
+        <Box
           sx={{
-            '&:hover': {
-              cursor: 'pointer',
-            },
+            fontSize: '18px',
+            color: '#333',
+
+            fontWeight: 700,
           }}
-          variant="body1"
-          onClick={(e) => setShow((prevShow) => !prevShow)}
         >
-          {show
-            ? comment.comment_text
-            : comment.comment_text &&
-              comment.comment_text.trim().substring(0, maxLetters) +
-                (comment.comment_text.length > maxLetters ? '...' : '')}
-        </Typography>
+          {comment.author}
+        </Box>
+      </Box>
+
+      <Typography
+        sx={{
+          maxWidth: '100%',
+
+          '&:hover': {
+            cursor: 'pointer',
+          },
+
+          '@media (max-width: 420px)': {
+            fontSize: '16px',
+          },
+        }}
+        variant="body1"
+        onClick={(e) => setShow((prevShow) => !prevShow)}
+      >
+        {show
+          ? comment.comment_text
+          : comment.comment_text &&
+            comment.comment_text.trim().substring(0, maxLetters) +
+              (comment.comment_text.length > maxLetters ? '...' : '')}
+      </Typography>
+
+      <Box
+        sx={{
+          display: 'flex',
+          gap: '12px',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '6px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {comment._tags.map((tag) => (
+            <Box
+              key={tag}
+              sx={{
+                padding: '2px 8px',
+                backgroundColor: 'var(--color-grey)',
+                borderRadius: '12px',
+                fontSize: '16px',
+              }}
+              component="span"
+            >
+              {tag}
+            </Box>
+          ))}
+        </Box>
+
+        <Box
+          component="span"
+          sx={{
+            color: 'var(--color-grey-dark)',
+            letterSpacing: '0.8px',
+          }}
+        >
+          {moment(comment.created_at).format('YYYY.MM.DD')}
+        </Box>
       </Box>
     </Box>
   );
