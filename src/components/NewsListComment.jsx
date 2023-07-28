@@ -79,15 +79,17 @@ function NewsListComment({ comment }) {
           </Typography>
         </Box>
 
-        <IconButton
-          aria-label="open link"
-          color="primary"
-          href={comment.url || comment.story_url}
-          target="_blank"
-          rel="noreferrer noopener"
-        >
-          <OpenInNew />
-        </IconButton>
+        {(comment.url || comment.story_url) && (
+          <IconButton
+            aria-label="open link"
+            color="primary"
+            href={comment.url || comment.story_url}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <OpenInNew />
+          </IconButton>
+        )}
       </Box>
 
       <Typography
@@ -103,7 +105,7 @@ function NewsListComment({ comment }) {
           },
         }}
         variant="body1"
-        onClick={(e) => setShow((prevShow) => !prevShow)}
+        onClick={() => setShow((prevShow) => !prevShow)}
       >
         {show
           ? comment.comment_text

@@ -20,10 +20,6 @@ function NewsList({ posts, sortType }) {
             <NewsListComment comment={comment} />
           </Grid>
         ))}
-
-      {/* <Grid item md={12}>
-        <NewsListComment comment="The other commenters are being too nice in their replies.You&#x27;re full of shit. JustFabis a shoe of the month club masquerading as a normal online shoe store. The VIP MembershipProgram is the essence of JustFab&#x27;s business model and yet it&#x27;s missing entirelyfrom the home page of their site. It looks like any other shoe store. And yet you think" />
-      </Grid> */}
     </Grid>
   );
 }
