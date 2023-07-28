@@ -4,8 +4,6 @@ import { Favorite, Comment } from '@mui/icons-material';
 import moment from 'moment/moment';
 
 function NewsListStory({ story }) {
-  const storyDate = new Date(story.created_at_i);
-
   return (
     <Box
       sx={{

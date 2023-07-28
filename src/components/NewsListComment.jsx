@@ -1,5 +1,7 @@
 import { useState } from 'react';
-import { Box, Typography, Avatar } from '@mui/material';
+import { Box, Typography, Avatar, IconButton } from '@mui/material';
+
+import { OpenInNew } from '@mui/icons-material';
 
 import moment from 'moment/moment';
 
@@ -53,20 +55,39 @@ function NewsListComment({ comment }) {
           display: 'flex',
           gap: '12px',
           alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
         }}
       >
-        <Avatar {...stringAvatar(comment.author)}></Avatar>
-
         <Box
           sx={{
-            fontSize: '18px',
-            color: '#333',
-
-            fontWeight: 700,
+            display: 'flex',
+            gap: '12px',
           }}
         >
-          {comment.author}
+          <Avatar {...stringAvatar(comment.author)}></Avatar>
+
+          <Typography
+            sx={{
+              color: '#333',
+
+              fontWeight: 700,
+            }}
+            variant="h6"
+          >
+            {comment.author}
+          </Typography>
         </Box>
+
+        <IconButton
+          aria-label="open link"
+          color="primary"
+          href={comment.url || comment.story_url}
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <OpenInNew />
+        </IconButton>
       </Box>
 
       <Typography
