@@ -133,7 +133,6 @@ function App() {
         <Container maxWidth="md">
           <Header
             onSearch={handleSearch}
-            error={error}
             sortType={sortType}
             onSortTypeChange={handleSortType}
             sortBy={sortBy}

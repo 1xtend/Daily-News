@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Input from './Input';
 import CustomButton from './CustomButton';
 
-function SearchForm({ onSearch, error }) {
+function SearchForm({ onSearch }) {
   const [searchValue, setSearchValue] = useState('');
 
   return (

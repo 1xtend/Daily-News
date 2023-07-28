@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import SearchForm from './SearchForm';
 import SearchSelects from './SearchSelects';
 
-function Header({ onSearch, error, sortType, onSortTypeChange, sortBy, onSortByChange }) {
+function Header({ onSearch, sortType, onSortTypeChange, sortBy, onSortByChange }) {
   return (
     <Box
       sx={{
@@ -15,7 +15,7 @@ function Header({ onSearch, error, sortType, onSortTypeChange, sortBy, onSortByC
       }}
       component="header"
     >
-      <SearchForm onSearch={onSearch} error={error} />
+      <SearchForm onSearch={onSearch} />
       <SearchSelects
         sortType={sortType}
         onSortTypeChange={onSortTypeChange}
