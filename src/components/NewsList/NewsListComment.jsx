@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Box, Typography, Avatar, IconButton } from '@mui/material';
 
 import { OpenInNew } from '@mui/icons-material';
-
 import moment from 'moment/moment';
 
 function NewsListComment({ post, replaceSymbols }) {
   const [show, setShow] = useState(false);
 
   const maxLetters = 220;
+  const commentText = post.comment_text && replaceSymbols(post.comment_text);
 
   function stringToColor(string) {
     let hash = 0;
@@ -108,10 +108,10 @@ function NewsListComment({ post, replaceSymbols }) {
         onClick={() => setShow((prevShow) => !prevShow)}
       >
         {show
-          ? post.comment_text
-          : post.comment_text &&
-            replaceSymbols(post.comment_text).trim().substring(0, maxLetters) +
-              (post.comment_text.length > maxLetters ? '...' : '')}
+          ? commentText
+          : commentText &&
+            commentText.trim().substring(0, maxLetters) +
+              (commentText.length > maxLetters ? '...' : '')}
       </Typography>
 
       <Box

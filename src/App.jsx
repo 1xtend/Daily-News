@@ -114,8 +114,17 @@ function App() {
   function replaceSymbols(text) {
     text = text.replace(/&quot;/gi, '"');
     text = text.replace(/&#x27;/gi, "'");
-    text = text.replace(/<i>/gi, '');
-    text = text.replace(/<\/i>/gi, '');
+    text = text.replace(/&#x2F;/gi, '/');
+    text = text.replace(/&gt;/gi, '>');
+    text = text.replace(/&#62;/gi, '>');
+    text = text.replace(/&lt;/gi, '<');
+    text = text.replace(/&#60;/gi, '<');
+    text = text.replace(/&amp;/gi, '&');
+    text = text.replace(/&#38;/gi, '&');
+    text = text.replace(/\\n/gi, '\t ');
+    text = text.replace(/(?<=<a)(.*)(?=<\/a>)/gi, '');
+
+    text = text.replace(/<\/?[^>]+(>|$)/g, '');
 
     return text;
   }
