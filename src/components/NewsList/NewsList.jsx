@@ -1,5 +1,4 @@
 import NewsListElement from './NewsListElement';
-
 import { Grid } from '@mui/material';
 
 function NewsList({ posts, sortType, replaceSymbols }) {

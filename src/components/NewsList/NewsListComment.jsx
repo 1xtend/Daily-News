@@ -5,7 +5,7 @@ import { OpenInNew } from '@mui/icons-material';
 
 import moment from 'moment/moment';
 
-function NewsListComment({ comment, replaceSymbols }) {
+function NewsListComment({ post, replaceSymbols }) {
   const [show, setShow] = useState(false);
 
   const maxLetters = 220;
@@ -65,7 +65,7 @@ function NewsListComment({ comment, replaceSymbols }) {
             gap: '12px',
           }}
         >
-          <Avatar {...stringAvatar(comment.author)}></Avatar>
+          <Avatar {...stringAvatar(post.author)}></Avatar>
 
           <Typography
             sx={{
@@ -75,15 +75,15 @@ function NewsListComment({ comment, replaceSymbols }) {
             }}
             variant="h6"
           >
-            {comment.author}
+            {post.author}
           </Typography>
         </Box>
 
-        {(comment.url || comment.story_url) && (
+        {(post.url || post.story_url) && (
           <IconButton
             aria-label="open link"
             color="primary"
-            href={comment.url || comment.story_url}
+            href={post.url || post.story_url}
             target="_blank"
             rel="noreferrer noopener"
           >
@@ -108,10 +108,10 @@ function NewsListComment({ comment, replaceSymbols }) {
         onClick={() => setShow((prevShow) => !prevShow)}
       >
         {show
-          ? comment.comment_text
-          : comment.comment_text &&
-            replaceSymbols(comment.comment_text).trim().substring(0, maxLetters) +
-              (comment.comment_text.length > maxLetters ? '...' : '')}
+          ? post.comment_text
+          : post.comment_text &&
+            replaceSymbols(post.comment_text).trim().substring(0, maxLetters) +
+              (post.comment_text.length > maxLetters ? '...' : '')}
       </Typography>
 
       <Box
@@ -129,7 +129,7 @@ function NewsListComment({ comment, replaceSymbols }) {
             flexWrap: 'wrap',
           }}
         >
-          {comment._tags.map((tag) => (
+          {post._tags.map((tag) => (
             <Box
               key={tag}
               sx={{
@@ -152,7 +152,7 @@ function NewsListComment({ comment, replaceSymbols }) {
             letterSpacing: '0.8px',
           }}
         >
-          {moment(comment.created_at).format('YYYY.MM.DD')}
+          {moment(post.created_at).format('YYYY.MM.DD')}
         </Box>
       </Box>
     </Box>

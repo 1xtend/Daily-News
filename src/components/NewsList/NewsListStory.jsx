@@ -3,7 +3,7 @@ import { Favorite, Comment } from '@mui/icons-material';
 
 import moment from 'moment/moment';
 
-function NewsListStory({ story }) {
+function NewsListStory({ post }) {
   return (
     <Box
       sx={{
@@ -18,11 +18,11 @@ function NewsListStory({ story }) {
       }}
     >
       <Link
-        href={story.url || story.story_url ? story.url || story.story_url : null}
+        href={post.url || post.story_url ? post.url || post.story_url : null}
         target="_blank"
         rel="noreferrer noopener"
         underline="none"
-        className={`${!story.url && !story.story_url && 'disabled'}`}
+        className={`${!post.url && !post.story_url && 'disabled'}`}
         sx={{
           fontWeight: 700,
           display: 'block',
@@ -56,7 +56,7 @@ function NewsListStory({ story }) {
           },
         }}
       >
-        {story.title || story.story_title}
+        {post.title || post.story_title}
       </Link>
 
       <Box
@@ -79,7 +79,7 @@ function NewsListStory({ story }) {
               fill: 'var(--color-grey-dark)',
             }}
           />
-          <span>{story.points ? story.points : 0}</span>
+          <span>{post.points ? post.points : 0}</span>
         </Box>
 
         <Box
@@ -94,7 +94,7 @@ function NewsListStory({ story }) {
               fill: 'var(--color-grey-dark)',
             }}
           />
-          <span>{story.num_comments ? story.num_comments : 0}</span>
+          <span>{post.num_comments ? post.num_comments : 0}</span>
         </Box>
       </Box>
 
@@ -109,7 +109,7 @@ function NewsListStory({ story }) {
         }}
       >
         <span>Author: </span>
-        {story.author}
+        {post.author}
       </Box>
 
       <Box
@@ -119,7 +119,7 @@ function NewsListStory({ story }) {
           flexWrap: 'wrap',
         }}
       >
-        {story._tags.map((tag) => (
+        {post._tags.map((tag) => (
           <Box
             key={tag}
             sx={{
@@ -142,7 +142,7 @@ function NewsListStory({ story }) {
           letterSpacing: '0.8px',
         }}
       >
-        {moment(story.created_at).format('YYYY.MM.DD')}
+        {moment(post.created_at).format('YYYY.MM.DD')}
       </Box>
     </Box>
   );
