@@ -96,7 +96,7 @@ function NewsListComment({ post, replaceSymbols }) {
         sx={{
           maxWidth: '100%',
 
-          '&:hover': {
+          '&.show:hover': {
             cursor: 'pointer',
           },
 
@@ -104,6 +104,7 @@ function NewsListComment({ post, replaceSymbols }) {
             fontSize: '16px',
           },
         }}
+        className={commentText.length > maxLetters ? 'show' : null}
         variant="body1"
         onClick={() => setShow((prevShow) => !prevShow)}
       >
