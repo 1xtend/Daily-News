@@ -6,7 +6,7 @@ import { Box, Container, LinearProgress, Pagination, Alert, IconButton } from '@
 import { Close } from '@mui/icons-material';
 
 import Header from './components/Header';
-import NewsList from './components/NewsList';
+import NewsList from './components/NewsList/NewsList';
 
 const theme = createTheme({
   typography: {
@@ -111,6 +111,15 @@ function App() {
     setSortBy(value);
   }
 
+  function replaceSymbols(text) {
+    text = text.replace(/&quot;/gi, '"');
+    text = text.replace(/&#x27;/gi, "'");
+    text = text.replace(/<i>/gi, '');
+    text = text.replace(/<\/i>/gi, '');
+
+    return text;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -137,9 +146,12 @@ function App() {
             onSortTypeChange={handleSortType}
             sortBy={sortBy}
             onSortByChange={handleSortBy}
+            loading={loading}
           />
 
-          {!error.isError && posts.length > 0 && <NewsList posts={posts} sortType={sortType} />}
+          {!error.isError && posts.length > 0 && (
+            <NewsList posts={posts} sortType={sortType} replaceSymbols={replaceSymbols} />
+          )}
 
           {!error.isError && pagesCount > 1 && (
             <Box

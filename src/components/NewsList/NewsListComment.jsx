@@ -5,7 +5,7 @@ import { OpenInNew } from '@mui/icons-material';
 
 import moment from 'moment/moment';
 
-function NewsListComment({ comment }) {
+function NewsListComment({ comment, replaceSymbols }) {
   const [show, setShow] = useState(false);
 
   const maxLetters = 220;
@@ -110,7 +110,7 @@ function NewsListComment({ comment }) {
         {show
           ? comment.comment_text
           : comment.comment_text &&
-            comment.comment_text.trim().substring(0, maxLetters) +
+            replaceSymbols(comment.comment_text).trim().substring(0, maxLetters) +
               (comment.comment_text.length > maxLetters ? '...' : '')}
       </Typography>
 

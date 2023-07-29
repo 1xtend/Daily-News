@@ -1,6 +1,6 @@
 import { Select, Box, FormControl, InputLabel, MenuItem } from '@mui/material';
 
-function SearchSelects({ sortType, onSortTypeChange, sortBy, onSortByChange }) {
+function SearchSelects({ sortType, onSortTypeChange, sortBy, onSortByChange, loading }) {
   return (
     <Box
       sx={{
@@ -18,6 +18,7 @@ function SearchSelects({ sortType, onSortTypeChange, sortBy, onSortByChange }) {
           label="Type"
           value={sortType}
           onChange={(e) => onSortTypeChange(e.target.value)}
+          disabled={loading}
         >
           <MenuItem value="story">Stories</MenuItem>
           <MenuItem value="comment">Comments</MenuItem>
@@ -32,6 +33,7 @@ function SearchSelects({ sortType, onSortTypeChange, sortBy, onSortByChange }) {
           label="Sort By"
           value={sortBy}
           onChange={(e) => onSortByChange(e.target.value)}
+          disabled={loading}
         >
           <MenuItem value="search">Popularity</MenuItem>
           <MenuItem value="search_by_date">Date</MenuItem>
