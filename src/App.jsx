@@ -58,7 +58,7 @@ function App() {
   const [sortBy, setSortBy] = useState('search');
 
   useEffect(() => {
-    if (query === '') {
+    if (query === '' || error) {
       return;
     }
 
@@ -76,10 +76,11 @@ function App() {
       .then((res) => {
         if (res.data.nbHits <= 0) {
           setError('No posts');
-        } else {
-          setPosts(res.data.hits);
-          setPagesCount(res.data.nbPages);
+          return;
         }
+
+        setPosts(res.data.hits);
+        setPagesCount(res.data.nbPages);
       })
       .catch((err) => {
         setError(err.message);
@@ -94,20 +95,26 @@ function App() {
       });
   }, [query, page, sortType, sortBy]);
 
+  function resetDefaultStates() {
+    setPage(1);
+    setPagesCount(0);
+    setPosts([]);
+  }
+
   function handleSearch(e, query) {
     e.preventDefault();
 
     setQuery(query.trim());
-    setPosts([]);
-    setPage(1);
-    setPagesCount(0);
+    resetDefaultStates();
   }
 
   function handleSortType(value) {
+    resetDefaultStates();
     setSortType(value);
   }
 
   function handleSortBy(value) {
+    resetDefaultStates();
     setSortBy(value);
   }
 
@@ -121,9 +128,8 @@ function App() {
     text = text.replace(/&#60;/gi, '<');
     text = text.replace(/&amp;/gi, '&');
     text = text.replace(/&#38;/gi, '&');
-    text = text.replace(/\\n/gi, '\t ');
+    text = text.replace(/\n/gi, '');
     text = text.replace(/(?<=<a)(.*)(?=<\/a>)/gi, '');
-
     text = text.replace(/<\/?[^>]+(>|$)/g, '');
 
     return text;

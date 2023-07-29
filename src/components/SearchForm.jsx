@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import Input from './Input';
 import CustomButton from './CustomButton';
 
-function SearchForm({ onSearch }) {
+function SearchForm({ onSearch, loading }) {
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -28,6 +28,7 @@ function SearchForm({ onSearch }) {
         sx={{
           flex: '1 1 80%',
         }}
+        disabled={loading}
       />
 
       <CustomButton
@@ -36,6 +37,7 @@ function SearchForm({ onSearch }) {
         sx={{
           flex: '1 0 auto',
         }}
+        disabled={loading}
       >
         Search
       </CustomButton>

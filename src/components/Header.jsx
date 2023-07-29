@@ -15,7 +15,7 @@ function Header({ onSearch, sortType, onSortTypeChange, sortBy, onSortByChange, 
       }}
       component="header"
     >
-      <SearchForm onSearch={onSearch} />
+      <SearchForm onSearch={onSearch} loading={loading} />
       <SearchSelects
         sortType={sortType}
         onSortTypeChange={onSortTypeChange}
