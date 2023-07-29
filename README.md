@@ -1,2 +1,2 @@
 # Daily-News
-Website link - https://vlad-dailynews.netlify.app
+Website link - https://vlad-news.netlify.app
