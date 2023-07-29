@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Box, Typography, Avatar, IconButton } from '@mui/material';
+import { Box, Typography, Avatar, IconButton, Button } from '@mui/material';
 
-import { OpenInNew } from '@mui/icons-material';
+import { OpenInNew, ExpandMore } from '@mui/icons-material';
 import moment from 'moment/moment';
 
 function NewsListComment({ post, replaceSymbols }) {
@@ -96,17 +96,11 @@ function NewsListComment({ post, replaceSymbols }) {
         sx={{
           maxWidth: '100%',
 
-          '&.show:hover': {
-            cursor: 'pointer',
-          },
-
           '@media (max-width: 420px)': {
             fontSize: '16px',
           },
         }}
-        className={commentText.length > maxLetters ? 'show' : null}
         variant="body1"
-        onClick={() => setShow((prevShow) => !prevShow)}
       >
         {show
           ? commentText
@@ -114,6 +108,26 @@ function NewsListComment({ post, replaceSymbols }) {
             commentText.trim().substring(0, maxLetters) +
               (commentText.length > maxLetters ? '...' : '')}
       </Typography>
+
+      {commentText.length > maxLetters && (
+        <Button
+          variant="outlined"
+          size="small"
+          endIcon={
+            <ExpandMore
+              sx={
+                show && {
+                  transform: 'rotate(180deg)',
+                }
+              }
+            />
+          }
+          sx={{ textTransform: 'capitalize' }}
+          onClick={() => setShow((prevShow) => !prevShow)}
+        >
+          {show ? 'Read less' : 'Read more'}
+        </Button>
+      )}
 
       <Box
         sx={{
