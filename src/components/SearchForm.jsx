@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
-import Input from './Input';
+import { Box, TextField } from '@mui/material';
 import CustomButton from './CustomButton';
 
 function SearchForm({ onSearch, loading }) {
@@ -17,7 +16,7 @@ function SearchForm({ onSearch, loading }) {
       }}
       onSubmit={(e) => onSearch(e, searchValue)}
     >
-      <Input
+      <TextField
         variant="outlined"
         label="Search"
         fullWidth
