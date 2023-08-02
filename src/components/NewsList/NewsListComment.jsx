@@ -109,6 +109,10 @@ function NewsListComment({ post }) {
           fontSize: '18px',
           lineHeight: '1.5',
 
+          'pre, code': {
+            whiteSpace: 'pre-wrap',
+          },
+
           '@media (max-width: 420px)': {
             fontSize: '16px',
           },
