@@ -4,11 +4,10 @@ import { Box, Typography, Avatar, IconButton, Button } from '@mui/material';
 import { OpenInNew, ExpandMore } from '@mui/icons-material';
 import moment from 'moment/moment';
 
-function NewsListComment({ post, replaceSymbols }) {
+function NewsListComment({ post }) {
   const [show, setShow] = useState(false);
 
   const maxLetters = 220;
-  const commentText = post.comment_text && replaceSymbols(post.comment_text);
 
   function stringToColor(string) {
     let hash = 0;
@@ -34,6 +33,16 @@ function NewsListComment({ post, replaceSymbols }) {
         bgcolor: stringToColor(name),
       },
       children: `${name.split(' ')[0][0]}`,
+    };
+  }
+
+  function checkedText() {
+    return {
+      __html: show
+        ? post.comment_text
+        : post.comment_text &&
+          post.comment_text.trim().substring(0, maxLetters) +
+            (post.comment_text.length > maxLetters ? '...' : ''),
     };
   }
 
@@ -92,37 +101,31 @@ function NewsListComment({ post, replaceSymbols }) {
         )}
       </Box>
 
-      <Typography
+      <Box
         sx={{
           maxWidth: '100%',
+          fontSize: '18px',
+          lineHeight: '1.5',
 
           '@media (max-width: 420px)': {
             fontSize: '16px',
           },
         }}
-        variant="body1"
-      >
-        {show
-          ? commentText
-          : commentText &&
-            commentText.trim().substring(0, maxLetters) +
-              (commentText.length > maxLetters ? '...' : '')}
-      </Typography>
+        dangerouslySetInnerHTML={checkedText()}
+      />
 
-      {commentText.length > maxLetters && (
+      {post.comment_text.length > maxLetters && (
         <Button
           variant="outlined"
           size="small"
-          endIcon={
-            <ExpandMore
-              sx={
-                show && {
-                  transform: 'rotate(180deg)',
-                }
-              }
-            />
-          }
-          sx={{ textTransform: 'capitalize' }}
+          sx={{
+            textTransform: 'capitalize',
+
+            '& .MuiButton-endIcon': {
+              transform: `rotate(${show ? '180deg' : 0})`,
+            },
+          }}
+          endIcon={<ExpandMore />}
           onClick={() => setShow((prevShow) => !prevShow)}
         >
           {show ? 'Read less' : 'Read more'}

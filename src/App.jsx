@@ -119,23 +119,6 @@ function App() {
     setSortBy(value);
   }
 
-  function replaceSymbols(text) {
-    text = text.replace(/&quot;/gi, '"');
-    text = text.replace(/&#x27;/gi, "'");
-    text = text.replace(/&#x2F;/gi, '/');
-    text = text.replace(/&gt;/gi, '>');
-    text = text.replace(/&#62;/gi, '>');
-    text = text.replace(/&lt;/gi, '<');
-    text = text.replace(/&#60;/gi, '<');
-    text = text.replace(/&amp;/gi, '&');
-    text = text.replace(/&#38;/gi, '&');
-    text = text.replace(/\n/gi, '');
-    text = text.replace(/(?<=<a)(.*)(?=<\/a>)/gi, '');
-    text = text.replace(/<\/?[^>]+(>|$)/g, '');
-
-    return text;
-  }
-
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -165,9 +148,7 @@ function App() {
             loading={loading}
           />
 
-          {!error.isError && posts.length > 0 && (
-            <NewsList posts={posts} sortType={sortType} replaceSymbols={replaceSymbols} />
-          )}
+          {!error.isError && posts.length > 0 && <NewsList posts={posts} sortType={sortType} />}
 
           {!error.isError && pagesCount > 1 && (
             <Box
