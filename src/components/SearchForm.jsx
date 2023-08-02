@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import { Box, TextField } from '@mui/material';
-import CustomButton from './CustomButton';
+import { Box, TextField, Button } from '@mui/material';
 
 function SearchForm({ onSearch, loading }) {
   const [searchValue, setSearchValue] = useState('');
@@ -30,7 +29,7 @@ function SearchForm({ onSearch, loading }) {
         disabled={loading}
       />
 
-      <CustomButton
+      <Button
         variant="outlined"
         type="submit"
         sx={{
@@ -39,7 +38,7 @@ function SearchForm({ onSearch, loading }) {
         disabled={loading}
       >
         Search
-      </CustomButton>
+      </Button>
     </Box>
   );
 }
