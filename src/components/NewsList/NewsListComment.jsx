@@ -37,12 +37,14 @@ function NewsListComment({ post }) {
   }
 
   function checkedText() {
+    const replacedCommentText = post.comment_text.replace(/\\n/g, '<br />');
+
     return {
       __html: show
-        ? post.comment_text
-        : post.comment_text &&
-          post.comment_text.trim().substring(0, maxLetters) +
-            (post.comment_text.length > maxLetters ? '...' : ''),
+        ? replacedCommentText
+        : replacedCommentText &&
+          replacedCommentText.trim().substring(0, maxLetters) +
+            (replacedCommentText.length > maxLetters ? '...' : ''),
     };
   }
 
